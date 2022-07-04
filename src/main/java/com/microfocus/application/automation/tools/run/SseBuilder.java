@@ -44,7 +44,6 @@ import com.microfocus.application.automation.tools.model.AlmServerSettingsModel;
 import com.microfocus.application.automation.tools.model.CdaDetails;
 import com.microfocus.application.automation.tools.model.EnumDescription;
 import com.microfocus.application.automation.tools.model.SseModel;
-import com.microfocus.application.automation.tools.settings.AlmServerSettingsGlobalConfiguration;
 import com.microfocus.application.automation.tools.sse.result.model.junit.Testcase;
 import com.microfocus.application.automation.tools.sse.result.model.junit.Testsuite;
 import com.microfocus.application.automation.tools.sse.result.model.junit.Testsuites;
@@ -413,11 +412,11 @@ public class SseBuilder extends Builder implements SimpleBuildStep {
 
         public boolean hasAlmServers() {
 
-            return AlmServerSettingsGlobalConfiguration.getInstance().hasAlmServers();
+            return false;
         }
 
         public AlmServerSettingsModel[] getAlmServers() {
-            return AlmServerSettingsGlobalConfiguration.getInstance().getInstallations();
+            return null;
         }
 
         public FormValidation doCheckTimeslotDuration(@QueryParameter String value) {

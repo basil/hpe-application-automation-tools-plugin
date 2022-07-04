@@ -36,7 +36,6 @@ import com.cloudbees.plugins.credentials.domains.URIRequirementBuilder;
 import com.cloudbees.plugins.credentials.matchers.IdMatcher;
 import com.microfocus.application.automation.tools.commonResultUpload.uploader.Uploader;
 import com.microfocus.application.automation.tools.model.AlmServerSettingsModel;
-import com.microfocus.application.automation.tools.settings.AlmServerSettingsGlobalConfiguration;
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.Launcher;
@@ -137,14 +136,6 @@ public class CommonResultUploadBuilder extends Recorder implements SimpleBuildSt
     }
 
     private String getAlmServerUrl(String almServerName) {
-        AlmServerSettingsModel[] almServers = AlmServerSettingsGlobalConfiguration.getInstance().getInstallations();
-        if (almServers != null && almServers.length > 0) {
-            for (AlmServerSettingsModel almServerModel: almServers) {
-                if (almServerName.equalsIgnoreCase(almServerModel.getAlmServerName())) {
-                    return almServerModel.getAlmServerUrl();
-                }
-            }
-        }
         return "";
     }
 
@@ -178,11 +169,11 @@ public class CommonResultUploadBuilder extends Recorder implements SimpleBuildSt
         }
 
         public boolean hasAlmServers() {
-            return AlmServerSettingsGlobalConfiguration.getInstance().hasAlmServers();
+            return false;
         }
 
         public AlmServerSettingsModel[] getAlmServers() {
-            return AlmServerSettingsGlobalConfiguration.getInstance().getInstallations();
+            return null;
         }
 
         public FormValidation doCheckAlmUserName(@QueryParameter String value) {

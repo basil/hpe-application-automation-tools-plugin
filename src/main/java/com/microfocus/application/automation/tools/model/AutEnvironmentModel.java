@@ -28,7 +28,6 @@
 
 package com.microfocus.application.automation.tools.model;
 
-import com.microfocus.application.automation.tools.settings.AlmServerSettingsGlobalConfiguration;
 import hudson.Extension;
 import hudson.model.AbstractDescribableImpl;
 import hudson.model.Descriptor;
@@ -185,7 +184,7 @@ public class AutEnvironmentModel extends AbstractDescribableImpl<AutEnvironmentM
         }
 
         public AlmServerSettingsModel[] getAlmServers() {
-            return AlmServerSettingsGlobalConfiguration.getInstance().getInstallations();
+            return null;
         }
 
         public FormValidation doCheckAlmUserName(@QueryParameter String value) {

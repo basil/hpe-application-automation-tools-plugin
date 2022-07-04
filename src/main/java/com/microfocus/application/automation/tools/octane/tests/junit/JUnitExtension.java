@@ -44,7 +44,6 @@ import com.microfocus.application.automation.tools.octane.tests.detection.MFTool
 import com.microfocus.application.automation.tools.octane.tests.detection.ResultFields;
 import com.microfocus.application.automation.tools.octane.tests.detection.ResultFieldsDetectionService;
 import com.microfocus.application.automation.tools.octane.tests.impl.ObjectStreamIterator;
-import com.microfocus.application.automation.tools.settings.RunnerMiscSettingsGlobalConfiguration;
 import hudson.Extension;
 import hudson.FilePath;
 import hudson.maven.MavenBuild;
@@ -104,7 +103,7 @@ public class JUnitExtension extends OctaneTestsExtension {
 		logger.debug("Collecting JUnit results");
 
 		FilePath resultFile = new FilePath(run.getRootDir()).child(JUNIT_RESULT_XML);
-		boolean getResultsOnController = !RunnerMiscSettingsGlobalConfiguration.getInstance().isAgentToControllerEnabled();
+		boolean getResultsOnController = true;
 		FilePath workspace = BuildHandlerUtils.getWorkspace(run);
 		if (resultFile.exists()) {
 			logger.debug("JUnit result report found");

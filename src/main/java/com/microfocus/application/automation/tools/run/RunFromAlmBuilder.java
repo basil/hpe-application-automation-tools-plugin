@@ -32,7 +32,6 @@ import com.microfocus.application.automation.tools.JenkinsUtils;
 import com.microfocus.application.automation.tools.model.*;
 import com.microfocus.application.automation.tools.octane.executor.UftConstants;
 import com.microfocus.application.automation.tools.uft.model.FilterTestsModel;
-import com.microfocus.application.automation.tools.settings.AlmServerSettingsGlobalConfiguration;
 import com.microfocus.application.automation.tools.uft.model.SpecifyParametersModel;
 import hudson.*;
 
@@ -134,8 +133,7 @@ public class RunFromAlmBuilder extends Builder implements SimpleBuildStep {
     }
 
     private AlmServerSettingsModel findAlmServerSettingsModel(String serverName) {
-        Stream<AlmServerSettingsModel> models = Arrays.stream(AlmServerSettingsGlobalConfiguration.getInstance().getInstallations());
-        return models.filter(m -> m.getAlmServerName().equals(serverName)).findFirst().orElse(null);
+        return null;
     }
 
     private boolean isUserNameDefinedAtSystemLevel(String serverName, String userName) {
@@ -471,11 +469,11 @@ public class RunFromAlmBuilder extends Builder implements SimpleBuildStep {
         }
 
         public boolean hasAlmServers() {
-            return AlmServerSettingsGlobalConfiguration.getInstance().hasAlmServers();
+            return false;
         }
 
         public Stream<AlmServerSettingsModel> getAlmServers() {
-            return Arrays.stream(AlmServerSettingsGlobalConfiguration.getInstance().getInstallations()).sorted();
+            return Stream.empty();
         }
 
         private AlmServerSettingsModel findAlmServer(String almServerName) {

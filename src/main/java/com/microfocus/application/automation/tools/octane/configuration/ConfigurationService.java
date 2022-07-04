@@ -29,11 +29,11 @@
 package com.microfocus.application.automation.tools.octane.configuration;
 
 import com.microfocus.application.automation.tools.model.OctaneServerSettingsModel;
-import com.microfocus.application.automation.tools.settings.OctaneServerSettingsGlobalConfiguration;
 import hudson.Plugin;
 import jenkins.model.Jenkins;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /***
@@ -49,7 +49,7 @@ public class ConfigurationService {
 	 * @return list of all available configurations
 	 */
 	public static List<OctaneServerSettingsModel> getAllSettings() {
-		return Arrays.asList(OctaneServerSettingsGlobalConfiguration.getInstance().getServers());
+		return Collections.emptyList();
 	}
 
 	/**
@@ -58,7 +58,7 @@ public class ConfigurationService {
 	 * @return current configuration
 	 */
 	public static OctaneServerSettingsModel getSettings(String instanceId) {
-		return OctaneServerSettingsGlobalConfiguration.getInstance().getSettings(instanceId);
+		return null;
 	}
 
 	/**
@@ -67,7 +67,6 @@ public class ConfigurationService {
 	 * @param newModel new configuration
 	 */
 	public static void configurePlugin(OctaneServerSettingsModel newModel) {
-		OctaneServerSettingsGlobalConfiguration.getInstance().setModel(newModel);
 	}
 
 	/**

@@ -37,7 +37,6 @@ import com.microfocus.application.automation.tools.lr.model.ScriptRTSSetModel;
 import com.microfocus.application.automation.tools.lr.model.SummaryDataLogModel;
 import com.microfocus.application.automation.tools.mc.JobConfigurationProxy;
 import com.microfocus.application.automation.tools.model.*;
-import com.microfocus.application.automation.tools.settings.MCServerSettingsGlobalConfiguration;
 import com.microfocus.application.automation.tools.uft.model.SpecifyParametersModel;
 import com.microfocus.application.automation.tools.uft.model.UftSettingsModel;
 import com.microfocus.application.automation.tools.uft.utils.UftToolUtils;
@@ -1024,14 +1023,7 @@ public class RunFromFileBuilder extends Builder implements SimpleBuildStep {
         @SuppressWarnings("squid:S2259")
         @JavaScriptMethod
         public String getMcServerUrl(String serverName) {
-            String serverUrl = "";
-            MCServerSettingsModel[] servers = MCServerSettingsGlobalConfiguration.getInstance().getInstallations();
-            for (MCServerSettingsModel mcServer : servers) {
-                if (mcServer.getMcServerName().equals(serverName)) {
-                    serverUrl = mcServer.getMcServerUrl();
-                }
-            }
-            return serverUrl;
+            return "";
         }
 
         @Override
@@ -1093,7 +1085,7 @@ public class RunFromFileBuilder extends Builder implements SimpleBuildStep {
          */
         @SuppressWarnings("squid:S2259")
         public boolean hasMCServers() {
-            return MCServerSettingsGlobalConfiguration.getInstance().hasMCServers();
+            return false;
         }
 
         /**
@@ -1104,7 +1096,7 @@ public class RunFromFileBuilder extends Builder implements SimpleBuildStep {
         @SuppressWarnings("squid:S2259")
 
         public MCServerSettingsModel[] getMcServers() {
-            return MCServerSettingsGlobalConfiguration.getInstance().getInstallations();
+            return null;
         }
 
         /**

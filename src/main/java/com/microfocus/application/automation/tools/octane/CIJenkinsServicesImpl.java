@@ -72,7 +72,6 @@ import com.microfocus.application.automation.tools.octane.testrunner.TestsToRunC
 import com.microfocus.application.automation.tools.octane.tests.TestListener;
 import com.microfocus.application.automation.tools.octane.tests.build.BuildHandlerUtils;
 import com.microfocus.application.automation.tools.octane.tests.junit.JUnitExtension;
-import com.microfocus.application.automation.tools.settings.RunnerMiscSettingsGlobalConfiguration;
 import hudson.ProxyConfiguration;
 import hudson.console.PlainTextConsoleOutputStream;
 import hudson.matrix.MatrixConfiguration;
@@ -114,8 +113,6 @@ public class CIJenkinsServicesImpl extends CIPluginServices {
     private static final DTOFactory dtoFactory = DTOFactory.getInstance();
     private static final Logger logger = SDKBasedLoggerProvider.getLogger(CIJenkinsServicesImpl.class);
     private static final java.util.logging.Logger systemLogger = java.util.logging.Logger.getLogger(CIJenkinsServicesImpl.class.getName());
-
-    private static final RunnerMiscSettingsGlobalConfiguration config = GlobalConfiguration.all().get(RunnerMiscSettingsGlobalConfiguration.class);
 
     private static final String DEFAULT_BRANCHES_SEPARATOR = " ";
 
@@ -686,26 +683,6 @@ public class CIJenkinsServicesImpl extends CIPluginServices {
     }
 
     private void addParametersAndDefaultBranchFromConfig(Item item, PipelineNode result) {
-        String defaultBranchesConfig = config != null ? config.getDefaultBranches() : null;
-        if(defaultBranchesConfig != null && !defaultBranchesConfig.isEmpty()) {
-            String[] defaultBranchesArray = defaultBranchesConfig.split(DEFAULT_BRANCHES_SEPARATOR);
-            Set<String> defaultBranches = Arrays.stream(defaultBranchesArray)
-                    .map(String::trim)
-                    .filter(StringUtils::isNotEmpty)
-                    .collect(Collectors.toSet());
-
-            Collection<? extends Job> allJobs = item.getAllJobs();
-
-            Job job = allJobs.stream()
-                    .filter(tempJob -> defaultBranches.contains(getDisplayNameFromJob(tempJob)))
-                    .findFirst().orElse(null);
-
-            if (job != null) {
-                String defaultBranch = getDisplayNameFromJob(job);
-                result.setParameters(ParameterProcessors.getConfigs(job))
-                        .setDefaultBranchName(defaultBranch);
-            }
-        }
     }
 
     private String getDisplayNameFromJob(Job tempJob) {

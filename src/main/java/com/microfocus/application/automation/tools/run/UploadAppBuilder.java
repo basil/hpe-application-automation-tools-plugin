@@ -30,7 +30,6 @@ package com.microfocus.application.automation.tools.run;
 
 import com.microfocus.application.automation.tools.mc.JobConfigurationProxy;
 import com.microfocus.application.automation.tools.model.*;
-import com.microfocus.application.automation.tools.settings.MCServerSettingsGlobalConfiguration;
 import com.microfocus.application.automation.tools.sse.common.StringUtils;
 import hudson.Extension;
 import hudson.FilePath;
@@ -225,11 +224,11 @@ public class UploadAppBuilder extends Builder {
         }
 
         public boolean hasMCServers() {
-            return MCServerSettingsGlobalConfiguration.getInstance().hasMCServers();
+            return false;
         }
 
         public MCServerSettingsModel[] getMcServers() {
-            return MCServerSettingsGlobalConfiguration.getInstance().getInstallations();
+            return null;
         }
     }
 }

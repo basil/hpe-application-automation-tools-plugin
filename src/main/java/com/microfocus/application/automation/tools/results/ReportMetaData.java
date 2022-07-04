@@ -28,13 +28,11 @@
 
 package com.microfocus.application.automation.tools.results;
 
-import com.microfocus.application.automation.tools.settings.RunnerMiscSettingsGlobalConfiguration;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import static com.microfocus.application.automation.tools.settings.RunnerMiscSettingsGlobalConfiguration.*;
 
 public class ReportMetaData {
 
@@ -81,14 +79,6 @@ public class ReportMetaData {
     }
 
     private static LocalDateTime tryParseDate(String date) {
-        for (String pattern : DEFAULT_UFT_DATE_PATTERNS) {
-            try {
-                return LocalDateTime.parse(date, DateTimeFormatter.ofPattern(pattern));
-            } catch (DateTimeException | IllegalArgumentException ignored) {
-                // ignoring, trying to find appropriate date pattern for date string
-            }
-        }
-
         return null;
     }
 
@@ -97,16 +87,7 @@ public class ReportMetaData {
     }
 
     public String getFormattedDateTime() {
-        // there is a global configuration option to set the date format for RunResults, we format the received date at the last second
-        // because this way we can keep the default UFT formatting, nonetheless how users specify their own format
-        LocalDateTime dt = tryParseDate(dateTime);
-        if (dt == null) return dateTime;
-
-        try {
-            return dt.format(RunnerMiscSettingsGlobalConfiguration.getInstance().getDateFormatter());
-        } catch (NullPointerException ignored) {
-            return dateTime;
-        }
+        return dateTime;
     }
 
     public void setDateTime(String dateTime) {
